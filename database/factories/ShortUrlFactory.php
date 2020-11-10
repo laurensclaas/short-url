@@ -22,7 +22,10 @@ class ShortUrlFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'counter' => $this->faker->randomDigit,
+            'short_url' => Str::random(6),
         ];
+
+
     }
 }

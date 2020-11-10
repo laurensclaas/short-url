@@ -14,6 +14,8 @@ use App\Http\Controllers\ShortUrlController;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,13 +24,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+
+
+
+/* Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::group(['prefix' => 'short-urls'], function ($id) {
+        Route::get('{short-url}/edit', [ShortUrlController::class,'edit'])->name('short-urls.edit');
+     });
+}); */
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::group(['prefix' => 'short-urls'], static function () {
-        Route::get('', [ShortUrlController::class,'index']);
-        Route::get('create',[ShortUrlController::class,'create']);
-        Route::post('', [ShortUrlController::class,'store']);
-        Route::match(['put', 'patch'],'{short-url}',[ShortUrlController::class,'update']);
-        Route::delete('{short-url}',[ShortUrlController::class,'delete']);
+        Route::get('{ShortUrl}/edit', [ShortUrlController::class,'edit'])->name('short-urls.edit');
+        Route::get('', [ShortUrlController::class,'index'])->name('short-urls.overview');
+        Route::get('create',[ShortUrlController::class,'create'])->name("short-urls.create");
+        Route::get('succes',[ShortUrlController::class,'succes'])->name("short-urls.succes");
+        Route::post('', [ShortUrlController::class,'store'])->name("short-urls.store");
+        Route::match(['put', 'patch'],'{shortUrl}',[ShortUrlController::class,'update'])->name('short-urls.update');
+        Route::delete('{shortUrl}',[ShortUrlController::class,'delete'])->name('short-urls.delete');
     });
 });
 
+Route::get("{short_url}",[ShortUrlController::class,'redirectShortUrl'])->name('redirect.link');
