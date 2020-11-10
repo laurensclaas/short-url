@@ -15,6 +15,8 @@ class CreateShortUrlsTable extends Migration
     {
         Schema::create('short_urls', function (Blueprint $table) {
             $table->id();
+            $table->string('short_url');
+            $table->string('url');
             $table->timestamps();
         });
     }
