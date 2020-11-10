@@ -23,8 +23,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::group(['prefix' => 'short-url'], static function () {
+    Route::group(['prefix' => 'short-urls'], static function () {
         Route::get('', [ShortUrlController::class,'index']);
+        Route::get('create',[ShortUrlController::class,'create']);
+        Route::post('', [ShortUrlController::class,'store']);
+        Route::match(['put', 'patch'],'{short-url}',[ShortUrlController::class,'update']);
+        Route::delete('{short-url}',[ShortUrlController::class,'delete']);
     });
 });
 
