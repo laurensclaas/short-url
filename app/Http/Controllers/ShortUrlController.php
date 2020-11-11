@@ -13,12 +13,12 @@ class ShortUrlController extends Controller
         //dd('index');
         $short_urls = ShortUrl::all();
         
-        return view('short-urls\overview',['shortUrls' => $short_urls]);
+        return view('short-urls.overview',['shortUrls' => $short_urls]);
     }
 
     public function create(){
        // dd('create');
-       return view('short-urls\create');
+       return view('short-urls.create');
     }
 
     public function edit($id) {
@@ -27,14 +27,14 @@ class ShortUrlController extends Controller
         $short = ShortUrl::find($id);
 
         //dd($short);
-        return view('short-urls\edit', ['short_url'=> $short]);
+        return view('short-urls.edit', ['short_url'=> $short]);
     }
     public function store(Request $request) {
         $val_url = $this->validateUrl();
         $val_url['short_url'] = Str::random(6);
         $val_url['counter'] = 0;
         $short =  ShortUrl::create($val_url);
-        return view('short-urls\succes',['short_url' => $short]);
+        return view('short-urls.succes',['short_url' => $short]);
     }
 
     
