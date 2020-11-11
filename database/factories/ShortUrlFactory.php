@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ShortUrl;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ShortUrlFactory extends Factory
 {
@@ -25,7 +26,5 @@ class ShortUrlFactory extends Factory
             'counter' => $this->faker->randomDigit,
             'short_url' => Str::random(6),
         ];
-
-
     }
 }

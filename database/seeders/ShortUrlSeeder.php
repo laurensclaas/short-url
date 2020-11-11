@@ -20,11 +20,8 @@ class ShortUrlSeeder extends Seeder
         $urls = ShortUrl::first();
         if (!$urls) {
             while (!empty($url_test))
-                ShortUrl::insert([
-                    [
-                        'url' => array_shift($url_test),
-                    ]
-                ]);
+                
+            ShortUrl::factory()->create(['url' =>array_shift($url_test)]);
         }
     }
 }
